@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- PLAY MUSIC BUTTON (REQUIRED BY BROWSERS) -->
+<button id="playMusicBtn">🎵 Tap to Play Music</button>
+
+<div class="wrapper">
+
+  <!-- CARD 1 -->
+  <div class="book reveal" onclick="openBook(this)">
+    <div class="cover">
+      <div class="ribbon"></div>
+      <div class="seal">💌</div>
+      <div class="cover-text">Happy Birthday 🎂</div>
+    </div>
+
+    <div class="page left">
+      <div class="photos">
+        <img src="images/photo1.jpg">
+        <img src="images/photo2.jpg">
+      </div>
+    </div>
+
+    <div class="page right">
+      <h2>For You</h2>
+      <p class="typewriter">
+        May your day be filled with warmth, love, and moments that make you smile.
+        I hope you always remember how special you are adiiii.
+      </p>
+    </div>
+  </div>
+
+  <!-- CARD 2 -->
+  <div class="book reveal" onclick="openBook(this)">
+    <div class="cover">
+      <div class="ribbon"></div>
+      <div class="seal">💌</div>
+      <div class="cover-text">Thank You</div>
+    </div>
+
+    <div class="page left">
+      <div class="photos">
+        <img src="images/photo3.jpg">
+        <img src="images/photo4.jpg">
+      </div>
+    </div>
+
+    <div class="page right">
+      <h2>Thank You</h2>
+      <p class="typewriter">
+        Thank you for being you — for your kindness, your laughter,
+        and the comfort you bring.
+      </p>
+    </div>
+  </div>
+
+  <!-- CARD 3 -->
+  <div class="book reveal" onclick="openBook(this)">
+    <div class="cover">
+      <div class="ribbon"></div>
+      <div class="seal">💌</div>
+      <div class="cover-text">Always</div>
+    </div>
+
+    <div class="page left">
+      <div class="photos">
+        <img src="images/photo5.jpg">
+        <img src="images/photo6.jpg">
+      </div>
+    </div>
+
+    <div class="page right">
+      <h2>Always</h2>
+      <p class="typewriter">
+        No matter where life takes you,
+        I hope you always feel loved,
+        appreciated, and never alone.
+      </p>
+      <p class="from">— Yours Truly, adiii</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- AUDIO -->
+<audio id="bgMusic" src="music/panalangin.mp3" preload="auto"></audio>
+
+<script>
+const music = document.getElementById('bgMusic');
+const playBtn = document.getElementById('playMusicBtn');
+let audioCtx, analyser, dataArray;
+let emojisRunning = false;
+
+/* 🔊 USER-INITIATED MUSIC (GUARANTEED) */
+playBtn.addEventListener('click', async () => {
+  music.volume = 0.8;
+  music.muted = false;
+  await music.play();
+
+  playBtn.style.display = 'none';
+  initAudioVisuals();
+});
+
+/* Audio visualizer AFTER playback starts */
+function initAudioVisuals() {
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  analyser = audioCtx.createAnalyser();
+  const source = audioCtx.createMediaElementSource(music);
+  source.connect(analyser);
+  analyser.connect(audioCtx.destination);
+
+  analyser.fftSize = 128;
+  dataArray = new Uint8Array(analyser.frequencyBinCount);
+  animateBackground();
+}
+
+/* Open book */
+function openBook(book) {
+  book.classList.add('open');
+  startEmojis();
+
+  const text = book.querySelector('.typewriter');
+  if (text && !text.dataset.done) {
+    text.dataset.done = true;
+    setTimeout(() => typeText(text), 700);
+  }
+}
+
+/* Typewriter */
+function typeText(el, speed = 28) {
+  const text = el.textContent.trim();
+  el.textContent = '';
+  let i = 0;
+  const timer = setInterval(() => {
+    el.textContent += text.charAt(i);
+    i++;
+    if (i >= text.length) clearInterval(timer);
+  }, speed);
+}
+
+/* Fade-in */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('show');
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* Background pulse */
+function animateBackground() {
+  requestAnimationFrame(animateBackground);
+  analyser.getByteFrequencyData(dataArray);
+  const avg = dataArray.reduce((a,b)=>a+b)/dataArray.length;
+  document.body.style.setProperty('--music-glow', Math.min(avg / 180, 0.35));
+}
+
+/* Emojis */
+function startEmojis() {
+  if (emojisRunning) return;
+  emojisRunning = true;
+  const emojis = ['💖','🌸','✨','💌','🌷'];
+
+  setInterval(() => {
+    const e = document.createElement('div');
+    e.className = 'emoji';
+    e.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    e.style.left = Math.random()*100 + 'vw';
+    e.style.bottom = '20px';
+    document.body.appendChild(e);
+    setTimeout(()=>e.remove(),6000);
+  }, 2200);
+}
+</script>
+
+</body>
+</html>
