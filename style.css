@@ -7,6 +7,16 @@ body {
   background: linear-gradient(180deg,#f5ecff,#fbe6f1);
 }
 
+/* Music glow */
+body::after {
+  content:'';
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle,rgba(190,150,255,0.25),transparent 60%);
+  opacity:var(--music-glow,0);
+  pointer-events:none;
+}
+
 /* Play button */
 #playMusicBtn {
   position: fixed;
@@ -24,15 +34,38 @@ body {
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
-/* Music glow */
-body::after {
-  content:'';
-  position:fixed;
-  inset:0;
-  background:radial-gradient(circle,rgba(190,150,255,0.25),transparent 60%);
-  opacity:var(--music-glow,0);
-  pointer-events:none;
+/* Music controls */
+#musicControls {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 28px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
 }
+
+#musicControls button {
+  border: none;
+  background: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #6a3f86;
+}
+
+#musicControls input[type="range"] {
+  accent-color: #b58bd6;
+  cursor: pointer;
+}
+
+#seekBar { width: 220px; }
+#volumeBar { width: 90px; }
 
 /* Scrapbook texture */
 :root {
@@ -85,9 +118,7 @@ body::after {
   justify-content:center;
 }
 
-.book.open .cover {
-  transform:rotateY(-180deg);
-}
+.book.open .cover { transform:rotateY(-180deg); }
 
 .cover-text {
   font-size:36px;
