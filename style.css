@@ -175,3 +175,112 @@ h2 {
   border-radius: 26px;
   box-shadow: 0 18px 40px rgba(180,140,200,0.35);
 }
+
+/* =========================
+   📱 MOBILE RESPONSIVE FIX
+   ========================= */
+
+@media (max-width: 768px) {
+
+  body {
+    padding: 40px 12px;
+  }
+
+  /* Wrapper spacing */
+  .wrapper {
+    gap: 80px;
+  }
+
+  /* Book scales to screen */
+  .book {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    max-width: 420px;
+  }
+
+  /* Disable 3D overflow issues */
+  .book {
+    perspective: none;
+  }
+
+  /* Cover still works */
+  .cover {
+    border-radius: 28px;
+  }
+
+  /* Pages stack instead of side-by-side */
+  .page {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 32px 24px;
+  }
+
+  .page.left,
+  .page.right {
+    left: 0;
+    border-radius: 28px;
+  }
+
+  .page.right {
+    margin-top: 24px;
+  }
+
+  /* Photos resize nicely */
+  .photos img {
+    height: 180px;
+  }
+
+  /* Text scaling */
+  h2 {
+    font-size: 22px;
+  }
+
+  .page p {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .from {
+    font-size: 14px;
+  }
+
+  /* Ribbon thinner */
+  .ribbon {
+    width: 26px;
+    left: 16px;
+  }
+
+  /* Seal smaller */
+  .seal {
+    width: 44px;
+    height: 44px;
+    bottom: 24px;
+    right: 24px;
+  }
+
+  /* Music button */
+  #playMusicBtn {
+    font-size: 14px;
+    padding: 10px 18px;
+    bottom: 14px;
+  }
+
+  /* Music controls fit screen */
+  #musicControls {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 14px;
+    bottom: 60px;
+    width: calc(100% - 24px);
+  }
+
+  #seekBar {
+    width: 100%;
+  }
+
+  #volumeBar {
+    width: 100%;
+  }
+}
