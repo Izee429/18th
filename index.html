@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For You</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For You</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- PLAY BUTTON -->
+<!-- MUSIC START BUTTON -->
 <button id="playMusicBtn">🎵 Tap to Play Music</button>
+
+<!-- MUSIC CONTROLS -->
+<div id="musicControls">
+  <button id="playPause">⏸</button>
+  <input type="range" id="seekBar" min="0" value="0">
+  <input type="range" id="volumeBar" min="0" max="1" step="0.01" value="0.8">
+</div>
 
 <div class="wrapper">
 
@@ -25,8 +32,8 @@
 
     <div class="page left">
       <div class="photos">
-        <img src="images/photo1.jpg">
-        <img src="images/photo2.jpg">
+        <img src="images/photo1.jpg" alt="">
+        <img src="images/photo2.jpg" alt="">
       </div>
     </div>
 
@@ -49,8 +56,8 @@
 
     <div class="page left">
       <div class="photos">
-        <img src="images/photo3.jpg">
-        <img src="images/photo4.jpg">
+        <img src="images/photo3.jpg" alt="">
+        <img src="images/photo4.jpg" alt="">
       </div>
     </div>
 
@@ -73,8 +80,8 @@
 
     <div class="page left">
       <div class="photos">
-        <img src="images/photo5.jpg">
-        <img src="images/photo6.jpg">
+        <img src="images/photo5.jpg" alt="">
+        <img src="images/photo6.jpg" alt="">
       </div>
     </div>
 
@@ -92,26 +99,19 @@
 </div>
 
 <!-- AUDIO -->
-<audio id="bgMusic" src="music/panalangin.mp3" preload="auto"></audio>
-
-<!-- MUSIC CONTROLS (VISIBLE AFTER PLAY) -->
-<div id="musicControls">
-  <button id="playPause">⏸</button>
-  <input type="range" id="seekBar" min="0" value="0" step="1">
-  <input type="range" id="volumeBar" min="0" max="1" step="0.01" value="0.8">
-</div>
+<audio id="bgMusic" src="music/panalangin.mp3"></audio>
 
 <script>
 const music = document.getElementById('bgMusic');
 const playBtn = document.getElementById('playMusicBtn');
 const controls = document.getElementById('musicControls');
-const playPauseBtn = document.getElementById('playPause');
+const playPause = document.getElementById('playPause');
 const seekBar = document.getElementById('seekBar');
 const volumeBar = document.getElementById('volumeBar');
 
-let emojisRunning = false;
+controls.style.display = 'none';
 
-/* START MUSIC */
+/* Start music */
 playBtn.addEventListener('click', async () => {
   music.volume = volumeBar.value;
   await music.play();
@@ -120,13 +120,13 @@ playBtn.addEventListener('click', async () => {
 });
 
 /* Play / Pause */
-playPauseBtn.addEventListener('click', () => {
+playPause.addEventListener('click', () => {
   if (music.paused) {
     music.play();
-    playPauseBtn.textContent = '⏸';
+    playPause.textContent = '⏸';
   } else {
     music.pause();
-    playPauseBtn.textContent = '▶️';
+    playPause.textContent = '▶️';
   }
 });
 
@@ -145,15 +145,14 @@ volumeBar.addEventListener('input', () => {
   music.volume = volumeBar.value;
 });
 
-/* Open book */
+/* Open card */
 function openBook(book) {
   book.classList.add('open');
-  startEmojis();
 
   const text = book.querySelector('.typewriter');
   if (text && !text.dataset.done) {
     text.dataset.done = true;
-    setTimeout(() => typeText(text), 700);
+    typeText(text);
   }
 }
 
@@ -163,28 +162,9 @@ function typeText(el, speed = 28) {
   el.textContent = '';
   let i = 0;
   const timer = setInterval(() => {
-    el.textContent += text.charAt(i);
-    i++;
+    el.textContent += text.charAt(i++);
     if (i >= text.length) clearInterval(timer);
   }, speed);
-}
-
-/* Emojis */
-function startEmojis() {
-  if (emojisRunning) return;
-  emojisRunning = true;
-
-  const emojis = ['💖','🌸','✨','💌','🌷'];
-
-  setInterval(() => {
-    const e = document.createElement('div');
-    e.className = 'emoji';
-    e.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-    e.style.left = Math.random()*100 + 'vw';
-    e.style.bottom = '20px';
-    document.body.appendChild(e);
-    setTimeout(() => e.remove(), 6000);
-  }, 2200);
 }
 </script>
 
