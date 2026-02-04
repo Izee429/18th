@@ -185,56 +185,50 @@ h2 {
    (keeps same layout, just smaller)
    ========================= */
 
+/* =========================
+   📱 MOBILE SIZE FIX (CORRECT)
+   ========================= */
 @media (max-width: 768px) {
 
   body {
     padding: 40px 10px;
   }
 
-  /* Scale the entire book proportionally */
+  /* Let the book scale naturally */
   .book {
-    width: 92vw;        /* fit screen width */
-    height: calc(92vw * 0.72);  /* keeps original ratio */
+    width: 92vw;
+    height: auto;        /* ← IMPORTANT FIX */
     max-width: 420px;
-    max-height: 300px;
   }
 
-  /* Reduce cover title size */
-  .cover-text {
-    font-size: 20px;
-  }
-
-  /* Pages keep same structure but tighter spacing */
+  /* Pages adapt to content height */
   .page {
+    height: auto;
     padding: 28px 20px;
   }
 
-  /* Images smaller for mobile */
+  /* Photos fit better */
   .photos img {
-    height: 140px;
+    width: 100%;
+    height: auto;        /* ← stops cropping/stretching */
+    border-radius: 20px;
   }
 
-  /* Text scaling */
+  /* Smaller text for phone */
   h2 {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .page p {
-    font-size: 15px;
-    line-height: 1.6;
+    font-size: 16px;
+    line-height: 1.7;
   }
 
   .from {
-    font-size: 13px;
+    font-size: 14px;
   }
 
-  /* Music button smaller */
-  #playMusicBtn {
-    font-size: 13px;
-    padding: 8px 16px;
-  }
-
-  /* Music controls fit screen */
+  /* Music controls stay centered */
   #musicControls {
     width: calc(100% - 24px);
     flex-wrap: wrap;
@@ -242,11 +236,12 @@ h2 {
     padding: 10px 12px;
   }
 
-  #seekBar {
+  #seekBar,
+  #volumeBar {
     width: 100%;
   }
 
-  #volumeBar {
-    width: 100%;
+  #playMusicBtn {
+    bottom: 14px;
   }
 }
