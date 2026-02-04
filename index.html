@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy 18th Birthday adiiii 💜</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 18th Birthday adiiii 💜</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
-<!-- MUSIC START BUTTON -->
 <button id="playMusicBtn">🎵 Tap to Play Music</button>
 
-<!-- MUSIC CONTROLS -->
 <div id="musicControls">
   <button id="playPause">⏸</button>
   <input type="range" id="seekBar" min="0" value="0">
@@ -23,31 +21,31 @@
 <div class="wrapper">
 
   <!-- CARD 1 -->
-  <div class="book reveal" onclick="openBook(this)">
+  <div class="book" onclick="openBook(this)">
     <div class="cover">
       <div class="ribbon"></div>
       <div class="seal">💌</div>
-      <div class="cover-text">Happy Birthday 🎂</div>
+      <div class="cover-text">Happy 18th Birthday 🎂</div>
     </div>
 
     <div class="page left">
       <div class="photos">
-        <img src="images/photo1.jpeg" alt="">
-        <img src="images/photo2.JPG" alt="">
+        <img src="images/photo1.jpg">
+        <img src="images/photo2.jpg">
       </div>
     </div>
 
     <div class="page right">
       <h2>For You</h2>
-      <p class="typewriter">
-        Happyy 18th Birthdayy adiiiii! May your day be filled with warmth, love, and moments that make you smile.
-        I hope you always remember how special you are adiiii!! hehe
+      <p>
+        Happy 18th Birthday adiiii! May your day be filled with warmth,
+        love, and moments that make you smile.
       </p>
     </div>
   </div>
 
   <!-- CARD 2 -->
-  <div class="book reveal" onclick="openBook(this)">
+  <div class="book" onclick="openBook(this)">
     <div class="cover">
       <div class="ribbon"></div>
       <div class="seal">💌</div>
@@ -56,22 +54,22 @@
 
     <div class="page left">
       <div class="photos">
-        <img src="images/photo3.jpeg" alt="">
-        <img src="images/photo4.jpeg" alt="">
+        <img src="images/photo3.jpg">
+        <img src="images/photo4.jpg">
       </div>
     </div>
 
     <div class="page right">
       <h2>Thank You</h2>
-      <p class="typewriter">
-        Thank youu for being youu, forr yourr kindnesss, your laughterrr,
-        the joyy, and the wayy youu bringg colorr to thiss worlddd. Mayy youu have a wonderfull dayyy aheadd adiiii!
+      <p>
+        Thank you for being you — for your kindness, your laughter,
+        and the comfort you bring.
       </p>
     </div>
   </div>
 
   <!-- CARD 3 -->
-  <div class="book reveal" onclick="openBook(this)">
+  <div class="book" onclick="openBook(this)">
     <div class="cover">
       <div class="ribbon"></div>
       <div class="seal">💌</div>
@@ -80,16 +78,16 @@
 
     <div class="page left">
       <div class="photos">
-        <img src="images/photo5.jpeg" alt="">
-        <img src="images/photo6.jpeg" alt="">
+        <img src="images/photo5.jpg">
+        <img src="images/photo6.jpg">
       </div>
     </div>
 
     <div class="page right">
       <h2>Always</h2>
-      <p class="typewriter">
-        Grabeee 18 nakaaa, legall agee kanaa, Wishingg youu a Hapyyy Happyy Happyyy Birthdayyy adiiii!
-        I loveee youuuu adiii to infinityyy andd beyonddd mwaaaaaaaaaaa😘😘
+      <p>
+        No matter where life takes you, I hope you always feel loved,
+        appreciated, and never alone.
       </p>
       <p class="from">— Yours Truly, adiii</p>
     </div>
@@ -97,7 +95,6 @@
 
 </div>
 
-<!-- AUDIO -->
 <audio id="bgMusic" src="music/panalangin.mp3"></audio>
 
 <script>
@@ -110,7 +107,6 @@ const volumeBar = document.getElementById('volumeBar');
 
 controls.style.display = 'none';
 
-/* Start music */
 playBtn.addEventListener('click', async () => {
   music.volume = volumeBar.value;
   await music.play();
@@ -118,7 +114,6 @@ playBtn.addEventListener('click', async () => {
   controls.style.display = 'flex';
 });
 
-/* Play / Pause */
 playPause.addEventListener('click', () => {
   if (music.paused) {
     music.play();
@@ -129,7 +124,6 @@ playPause.addEventListener('click', () => {
   }
 });
 
-/* Seek */
 music.addEventListener('timeupdate', () => {
   seekBar.max = Math.floor(music.duration || 0);
   seekBar.value = Math.floor(music.currentTime);
@@ -139,40 +133,14 @@ seekBar.addEventListener('input', () => {
   music.currentTime = seekBar.value;
 });
 
-/* Volume */
 volumeBar.addEventListener('input', () => {
   music.volume = volumeBar.value;
 });
 
-/* Open card */
-function openBook(book) {
-  book.classList.add('open');
-
-  const text = book.querySelector('.typewriter');
-  if (text && !text.dataset.done) {
-    text.dataset.done = true;
-    typeText(text);
-  }
-}
-
-/* Typewriter */
-function typeText(el, speed = 28) {
-  const text = el.textContent.trim();
-  el.textContent = '';
-  let i = 0;
-  const timer = setInterval(() => {
-    el.textContent += text.charAt(i++);
-    if (i >= text.length) clearInterval(timer);
-  }, speed);
+function openBook(book){
+  book.classList.toggle("open");
 }
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
