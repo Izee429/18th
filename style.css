@@ -180,100 +180,66 @@ h2 {
    📱 MOBILE RESPONSIVE FIX
    ========================= */
 
+/* =========================
+   📱 MOBILE SIZE SCALING ONLY
+   (keeps same layout, just smaller)
+   ========================= */
+
 @media (max-width: 768px) {
 
   body {
-    padding: 40px 12px;
+    padding: 40px 10px;
   }
 
-  /* Wrapper spacing */
-  .wrapper {
-    gap: 80px;
-  }
-
-  /* Book scales to screen */
+  /* Scale the entire book proportionally */
   .book {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 3 / 4;
+    width: 92vw;        /* fit screen width */
+    height: calc(92vw * 0.72);  /* keeps original ratio */
     max-width: 420px;
+    max-height: 300px;
   }
 
-  /* Disable 3D overflow issues */
-  .book {
-    perspective: none;
+  /* Reduce cover title size */
+  .cover-text {
+    font-size: 20px;
   }
 
-  /* Cover still works */
-  .cover {
-    border-radius: 28px;
-  }
-
-  /* Pages stack instead of side-by-side */
+  /* Pages keep same structure but tighter spacing */
   .page {
-    position: relative;
-    width: 100%;
-    height: auto;
-    padding: 32px 24px;
+    padding: 28px 20px;
   }
 
-  .page.left,
-  .page.right {
-    left: 0;
-    border-radius: 28px;
-  }
-
-  .page.right {
-    margin-top: 24px;
-  }
-
-  /* Photos resize nicely */
+  /* Images smaller for mobile */
   .photos img {
-    height: 180px;
+    height: 140px;
   }
 
   /* Text scaling */
   h2 {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .page p {
-    font-size: 16px;
-    line-height: 1.7;
+    font-size: 15px;
+    line-height: 1.6;
   }
 
   .from {
-    font-size: 14px;
+    font-size: 13px;
   }
 
-  /* Ribbon thinner */
-  .ribbon {
-    width: 26px;
-    left: 16px;
-  }
-
-  /* Seal smaller */
-  .seal {
-    width: 44px;
-    height: 44px;
-    bottom: 24px;
-    right: 24px;
-  }
-
-  /* Music button */
+  /* Music button smaller */
   #playMusicBtn {
-    font-size: 14px;
-    padding: 10px 18px;
-    bottom: 14px;
+    font-size: 13px;
+    padding: 8px 16px;
   }
 
   /* Music controls fit screen */
   #musicControls {
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px 14px;
-    bottom: 60px;
     width: calc(100% - 24px);
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px 12px;
   }
 
   #seekBar {
