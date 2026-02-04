@@ -4,9 +4,10 @@
 
 body{
   margin:0;
-  padding:80px 16px;
+  padding:40px 12px;
   font-family:'Playfair Display',serif;
   background:linear-gradient(180deg,#f5ecff,#fbe6f1);
+  overflow-x:hidden;
 }
 
 /* =========================
@@ -17,11 +18,11 @@ body{
   bottom:20px;
   left:50%;
   transform:translateX(-50%);
-  padding:12px 22px;
+  padding:10px 20px;
   border-radius:30px;
   border:none;
-  font-size:15px;
   background:white;
+  font-size:14px;
   cursor:pointer;
   z-index:9999;
 }
@@ -32,46 +33,41 @@ body{
   left:50%;
   transform:translateX(-50%);
   display:flex;
-  gap:12px;
-  padding:12px 18px;
+  gap:10px;
+  padding:10px 14px;
   background:rgba(255,255,255,0.9);
-  border-radius:28px;
+  border-radius:24px;
   box-shadow:0 10px 25px rgba(0,0,0,0.15);
   z-index:9999;
 }
 
 #musicControls button{
-  background:none;
   border:none;
-  font-size:18px;
-  cursor:pointer;
+  background:none;
+  font-size:16px;
 }
 
-#musicControls input[type="range"]{
-  accent-color:#b58bd6;
-}
-
-#seekBar{width:220px;}
-#volumeBar{width:90px;}
+#seekBar{width:140px;}
+#volumeBar{width:70px;}
 
 /* =========================
-   📚 LAYOUT
+   📚 WRAPPER
    ========================= */
 .wrapper{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:140px;
+  gap:80px;
 }
 
 /* =========================
-   📖 BOOK STRUCTURE
+   📖 MOBILE BOOK
    ========================= */
 .book{
-  width:1000px;
-  height:720px;
+  width:92vw;          /* FULL MOBILE WIDTH */
+  height:520px;        /* FIXED HEIGHT FOR ALL PAGES */
   position:relative;
-  perspective:3000px;
+  perspective:2000px;
   cursor:pointer;
 }
 
@@ -80,41 +76,42 @@ body{
   position:absolute;
   inset:0;
   background:linear-gradient(160deg,#e7c8ff,#f6bfd9);
-  border-radius:40px;
+  border-radius:28px;
   transform-origin:left;
-  transition:transform 1.6s ease;
+  transition:transform 1.4s ease;
   z-index:10;
   display:flex;
   align-items:center;
   justify-content:center;
 }
 
-/* Flip animation */
 .book.open .cover{
   transform:rotateY(-180deg);
 }
 
 .cover-text{
-  font-size:36px;
+  font-size:22px;
   color:#5a2f6f;
+  text-align:center;
 }
 
-/* Ribbon + seal */
+/* Ribbon */
 .ribbon{
   position:absolute;
-  left:28px;
-  width:44px;
+  left:14px;
+  width:28px;
   height:100%;
   background:linear-gradient(#e7a1c4,#c77dbb);
-  border-radius:14px;
+  border-radius:10px;
 }
 
+/* Seal */
 .seal{
   position:absolute;
-  bottom:56px;
-  right:56px;
-  width:60px;
-  height:60px;
+  bottom:20px;
+  right:20px;
+  width:40px;
+  height:40px;
   border-radius:50%;
   background:radial-gradient(circle,#c04fa3,#8a2d6f);
   display:flex;
@@ -124,25 +121,25 @@ body{
 }
 
 /* =========================
-   📄 PAGES
+   📄 PAGES (SAME HEIGHT)
    ========================= */
 .page{
   position:absolute;
   top:0;
   width:50%;
-  height:100%; /* SAME HEIGHT AS BOOK */
-  padding:72px 64px;
+  height:100%;           /* ALL SAME HEIGHT */
+  padding:28px 20px;
   background:linear-gradient(160deg,#f4efff,#ede6ff);
 }
 
 .page.left{
   left:0;
-  border-radius:40px 0 0 40px;
+  border-radius:28px 0 0 28px;
 }
 
 .page.right{
   left:50%;
-  border-radius:0 40px 40px 0;
+  border-radius:0 28px 28px 0;
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -154,20 +151,19 @@ body{
    ✨ TEXT
    ========================= */
 h2{
-  font-size:30px;
+  font-size:20px;
   color:#a456c9;
 }
 
 .page p{
   font-family:'Quicksand',sans-serif;
-  font-size:19px;
-  line-height:1.9;
+  font-size:15px;
+  line-height:1.7;
   color:#5a4a63;
-  max-width:420px;
 }
 
 .from{
-  margin-top:28px;
+  margin-top:16px;
   font-style:italic;
   color:#9b6fa6;
 }
@@ -177,31 +173,13 @@ h2{
    ========================= */
 .photos{
   display:grid;
-  gap:28px;
+  gap:14px;
 }
 
 .photos img{
   width:100%;
-  height:260px;
+  height:150px;
   object-fit:cover;
-  border-radius:26px;
-  box-shadow:0 18px 40px rgba(180,140,200,0.35);
-}
-
-/* =========================
-   📱 ULTRA SMOOTH MOBILE SCALE
-   ========================= */
-@media(max-width:768px){
-
-  body{
-    padding:40px 10px;
-    overflow-x:hidden;
-  }
-
-  .wrapper{
-    transform:scale(.42);
-    transform-origin:top center;
-    width:240%;
-  }
-
+  border-radius:18px;
+  box-shadow:0 10px 20px rgba(180,140,200,0.35);
 }
