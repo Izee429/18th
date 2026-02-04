@@ -96,3 +96,24 @@ body {
     height: 720px; /* keeps proportions consistent when scaled */
   }
 }
+
+/* =========================
+   🔧 FORCE SAME HEIGHT FOR COVER + BOTH PAGES
+   ========================= */
+
+.book,
+.cover,
+.page {
+  height: 720px !important;
+}
+
+.page.left,
+.page.right {
+  top: 0;
+}
+
+.page.right {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
