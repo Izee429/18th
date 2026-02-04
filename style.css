@@ -1,4 +1,4 @@
-* {
+{
   box-sizing: border-box;
 }
 
@@ -117,3 +117,4 @@ body {
   flex-direction:column;
   justify-content:center;
 }
+
