@@ -1,120 +1,207 @@
-{
-  box-sizing: border-box;
+*{
+  box-sizing:border-box;
 }
 
-body {
-  margin: 0;
-  padding: 80px 16px;
-  font-family: 'Playfair Display', serif;
-  background: linear-gradient(180deg, #f5ecff, #fbe6f1);
-}
-
-/* Buttons */
-#playMusicBtn {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 12px 22px;
-  border-radius: 30px;
-  border: none;
-  font-size: 15px;
-  background: white;
-  cursor: pointer;
-  z-index: 9999;
-}
-
-/* Music Controls */
-#musicControls {
-  position: fixed;
-  bottom: 70px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 12px;
-  padding: 12px 18px;
-  background: rgba(255,255,255,0.9);
-  border-radius: 28px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  z-index: 9999;
-}
-
-#musicControls button {
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-#musicControls input[type="range"] {
-  accent-color: #b58bd6;
-}
-
-#seekBar { width: 220px; }
-#volumeBar { width: 90px; }
-
-/* Layout */
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 140px;
-}
-
-/* Book */
-/* =========================
-   📏 FORCE ALL PAGES SAME HEIGHT
-   ========================= */
-
-/* Make book control the height */
-.book {
-  display: block;
-}
-
-/* Cover must match book height */
-.cover {
-  height: 100%;
-}
-
-/* Both pages must match book height */
-.page {
-  height: 100%;
-  top: 0;
-  bottom: 0;
-}
-
-/* Ensure right page stretches fully */
-.page.right {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-/* Mobile scaling keeps equal height */
-@media (max-width:768px){
-  .book{
-    height: 720px; /* keeps proportions consistent when scaled */
-  }
+body{
+  margin:0;
+  padding:80px 16px;
+  font-family:'Playfair Display',serif;
+  background:linear-gradient(180deg,#f5ecff,#fbe6f1);
 }
 
 /* =========================
-   🔧 FORCE SAME HEIGHT FOR COVER + BOTH PAGES
+   🎵 MUSIC UI
    ========================= */
-
-.book,
-.cover,
-.page {
-  height: 720px !important;
+#playMusicBtn{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:12px 22px;
+  border-radius:30px;
+  border:none;
+  font-size:15px;
+  background:white;
+  cursor:pointer;
+  z-index:9999;
 }
 
-.page.left,
-.page.right {
-  top: 0;
+#musicControls{
+  position:fixed;
+  bottom:70px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:12px;
+  padding:12px 18px;
+  background:rgba(255,255,255,0.9);
+  border-radius:28px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+  z-index:9999;
 }
 
-.page.right {
+#musicControls button{
+  background:none;
+  border:none;
+  font-size:18px;
+  cursor:pointer;
+}
+
+#musicControls input[type="range"]{
+  accent-color:#b58bd6;
+}
+
+#seekBar{width:220px;}
+#volumeBar{width:90px;}
+
+/* =========================
+   📚 LAYOUT
+   ========================= */
+.wrapper{
   display:flex;
   flex-direction:column;
+  align-items:center;
+  gap:140px;
+}
+
+/* =========================
+   📖 BOOK STRUCTURE
+   ========================= */
+.book{
+  width:1000px;
+  height:720px;
+  position:relative;
+  perspective:3000px;
+  cursor:pointer;
+}
+
+/* COVER */
+.cover{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(160deg,#e7c8ff,#f6bfd9);
+  border-radius:40px;
+  transform-origin:left;
+  transition:transform 1.6s ease;
+  z-index:10;
+  display:flex;
+  align-items:center;
   justify-content:center;
 }
 
+/* Flip animation */
+.book.open .cover{
+  transform:rotateY(-180deg);
+}
+
+.cover-text{
+  font-size:36px;
+  color:#5a2f6f;
+}
+
+/* Ribbon + seal */
+.ribbon{
+  position:absolute;
+  left:28px;
+  width:44px;
+  height:100%;
+  background:linear-gradient(#e7a1c4,#c77dbb);
+  border-radius:14px;
+}
+
+.seal{
+  position:absolute;
+  bottom:56px;
+  right:56px;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:radial-gradient(circle,#c04fa3,#8a2d6f);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+}
+
+/* =========================
+   📄 PAGES
+   ========================= */
+.page{
+  position:absolute;
+  top:0;
+  width:50%;
+  height:100%; /* SAME HEIGHT AS BOOK */
+  padding:72px 64px;
+  background:linear-gradient(160deg,#f4efff,#ede6ff);
+}
+
+.page.left{
+  left:0;
+  border-radius:40px 0 0 40px;
+}
+
+.page.right{
+  left:50%;
+  border-radius:0 40px 40px 0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+/* =========================
+   ✨ TEXT
+   ========================= */
+h2{
+  font-size:30px;
+  color:#a456c9;
+}
+
+.page p{
+  font-family:'Quicksand',sans-serif;
+  font-size:19px;
+  line-height:1.9;
+  color:#5a4a63;
+  max-width:420px;
+}
+
+.from{
+  margin-top:28px;
+  font-style:italic;
+  color:#9b6fa6;
+}
+
+/* =========================
+   🖼 PHOTOS
+   ========================= */
+.photos{
+  display:grid;
+  gap:28px;
+}
+
+.photos img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  border-radius:26px;
+  box-shadow:0 18px 40px rgba(180,140,200,0.35);
+}
+
+/* =========================
+   📱 ULTRA SMOOTH MOBILE SCALE
+   ========================= */
+@media(max-width:768px){
+
+  body{
+    padding:40px 10px;
+    overflow-x:hidden;
+  }
+
+  .wrapper{
+    transform:scale(.42);
+    transform-origin:top center;
+    width:240%;
+  }
+
+}
