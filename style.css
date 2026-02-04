@@ -57,7 +57,9 @@ body{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:80px;
+  gap:60px;
+  transform:scale(.88);        /* 👈 makes whole site smaller */
+  transform-origin:top center;
 }
 
 /* =========================
@@ -183,3 +185,4 @@ h2{
   border-radius:18px;
   box-shadow:0 10px 20px rgba(180,140,200,0.35);
 }
+
