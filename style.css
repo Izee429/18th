@@ -177,71 +177,64 @@ h2 {
 }
 
 /* =========================
-   📱 MOBILE RESPONSIVE FIX
-   ========================= */
-
-/* =========================
-   📱 MOBILE SIZE SCALING ONLY
-   (keeps same layout, just smaller)
-   ========================= */
-
-/* =========================
-   📱 MOBILE SIZE FIX (CORRECT)
+   📱 MOBILE SIDE-BY-SIDE FIX
+   keeps book layout
    ========================= */
 @media (max-width: 768px) {
 
-  body {
-    padding: 40px 10px;
-  }
-
-  /* Let the book scale naturally */
+  /* Book scales but keeps layout */
   .book {
     width: 92vw;
-    height: auto;        /* ← IMPORTANT FIX */
     max-width: 420px;
+    height: auto;          /* ← allows card to grow */
+    min-height: 520px;     /* ← prevents collapse */
   }
 
-  /* Pages adapt to content height */
+  /* Keep pages SIDE BY SIDE */
   .page {
+    position: absolute;    /* ← keep book layout */
+    width: 50%;
     height: auto;
-    padding: 28px 20px;
+    padding: 28px 18px;
   }
 
-  /* Photos fit better */
+  .page.left {
+    left: 0;
+  }
+
+  .page.right {
+    left: 50%;
+  }
+
+  /* IMPORTANT: allow book to expand with content */
+  .book.open {
+    min-height: 700px;
+  }
+
+  /* Images fit mobile */
   .photos img {
-    width: 100%;
-    height: auto;        /* ← stops cropping/stretching */
-    border-radius: 20px;
+    height: auto;
   }
 
-  /* Smaller text for phone */
+  /* Smaller text */
   h2 {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .page p {
-    font-size: 16px;
-    line-height: 1.7;
+    font-size: 15px;
+    line-height: 1.6;
   }
 
-  .from {
-    font-size: 14px;
-  }
-
-  /* Music controls stay centered */
+  /* Music controls fit */
   #musicControls {
     width: calc(100% - 24px);
     flex-wrap: wrap;
-    gap: 8px;
-    padding: 10px 12px;
   }
 
   #seekBar,
   #volumeBar {
     width: 100%;
   }
-
-  #playMusicBtn {
-    bottom: 14px;
-  }
 }
+
