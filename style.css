@@ -78,7 +78,7 @@ body{
 }
 
 /* =========================
-   📖 COVER — CENTERED HINGE
+   📖 COVER — REAL HINGE
    ========================= */
 .cover{
   position:absolute;
@@ -86,9 +86,8 @@ body{
   background:linear-gradient(160deg,#e7c8ff,#f6bfd9);
   border-radius:28px;
 
-  /* ⭐ CENTERED HINGE */
-  transform-origin:50% 50%;
-  transition:transform 1.4s cubic-bezier(.25,.8,.25,1);
+  transform-origin:left center;   /* 👈 real hinge */
+  transition:transform 1.4s ease;
 
   z-index:10;
   display:flex;
@@ -96,10 +95,11 @@ body{
   justify-content:center;
 }
 
-/* ⭐ OPEN ANIMATION — KEEPS CENTERED */
+/* OPEN ANIMATION */
 .book.open .cover{
-  transform:translateX(-50%) rotateY(-180deg);
+  transform:rotateY(-180deg);
 }
+
 
 .cover-text{
   font-size:22px;
@@ -195,6 +195,7 @@ h2{
   border-radius:18px;
   box-shadow:0 10px 20px rgba(180,140,200,0.35);
 }
+
 
 
 
