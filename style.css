@@ -76,19 +76,23 @@ body{
    ⭐ REAL COVER FIX
    cover = LEFT PAGE ONLY
    ========================= */
+/* =========================
+   📖 SMART COVER BEHAVIOR
+   ========================= */
+
+/* CLOSED STATE — cover hides BOTH pages */
 .cover{
   position:absolute;
   top:0;
   left:0;
-
-  width:50%;             /* ⭐ FIXED */
+  width:100%;                /* 👈 full cover when closed */
   height:100%;
 
   background:linear-gradient(160deg,#e7c8ff,#f6bfd9);
-  border-radius:28px 0 0 28px;
+  border-radius:28px;
 
   transform-origin:left center;
-  transition:transform 1.4s ease;
+  transition:transform 1.4s ease, width .6s ease;
 
   z-index:10;
   display:flex;
@@ -96,9 +100,13 @@ body{
   justify-content:center;
 }
 
+/* OPEN STATE — cover becomes LEFT PAGE ONLY */
 .book.open .cover{
+  width:50%;                 /* 👈 shrinks to left page */
+  border-radius:28px 0 0 28px;
   transform:rotateY(-180deg);
 }
+
 
 .cover-text{
   font-size:22px;
@@ -191,3 +199,4 @@ h2{
   border-radius:18px;
   box-shadow:0 10px 20px rgba(180,140,200,0.35);
 }
+
