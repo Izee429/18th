@@ -62,179 +62,37 @@ body {
 }
 
 /* Book */
+/* =========================
+   📏 FORCE ALL PAGES SAME HEIGHT
+   ========================= */
+
+/* Make book control the height */
 .book {
-  width: 1000px;
-  height: 720px;
-  perspective: 3000px;
-  position: relative;
-  cursor: pointer;
+  display: block;
 }
 
-/* Cover */
+/* Cover must match book height */
 .cover {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(160deg, #e7c8ff, #f6bfd9);
-  border-radius: 40px;
-  transform-origin: left center;
-  transition: transform 1.6s ease;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.book.open .cover {
-  transform: rotateY(-180deg);
-}
-
-.cover-text {
-  font-size: 36px;
-  color: #5a2f6f;
-}
-
-/* Ribbon & Seal */
-.ribbon {
-  position: absolute;
-  left: 28px;
-  width: 44px;
   height: 100%;
-  background: linear-gradient(#e7a1c4, #c77dbb);
-  border-radius: 14px;
 }
 
-.seal {
-  position: absolute;
-  bottom: 56px;
-  right: 56px;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #c04fa3, #8a2d6f);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-}
-
-/* Pages */
+/* Both pages must match book height */
 .page {
-  position: absolute;
-  top: 0;
-  width: 50%;
   height: 100%;
-  background: linear-gradient(160deg, #f4efff, #ede6ff);
-  padding: 72px 64px;
+  top: 0;
+  bottom: 0;
 }
 
-.page.left {
-  left: 0;
-  border-radius: 40px 0 0 40px;
-}
-
+/* Ensure right page stretches fully */
 .page.right {
-  left: 50%;
-  border-radius: 0 40px 40px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  text-align: center;
 }
 
-/* Text */
-h2 {
-  font-size: 30px;
-  color: #a456c9;
-}
-
-.page p {
-  font-family: 'Quicksand', sans-serif;
-  font-size: 19px;
-  line-height: 1.9;
-  max-width: 420px;
-  color: #5a4a63;
-}
-
-.from {
-  margin-top: 28px;
-  font-style: italic;
-  color: #9b6fa6;
-}
-
-/* Photos */
-.photos {
-  display: grid;
-  gap: 28px;
-}
-
-.photos img {
-  width: 100%;
-  height: 260px;
-  object-fit: cover;
-  border-radius: 26px;
-  box-shadow: 0 18px 40px rgba(180,140,200,0.35);
-}
-
-/* =========================
-   📱 MOBILE SIDE-BY-SIDE FIX
-   keeps book layout
-   ========================= */
-@media (max-width: 768px) {
-
-  /* Book scales but keeps layout */
-  .book {
-    width: 92vw;
-    max-width: 420px;
-    height: auto;          /* ← allows card to grow */
-    min-height: 520px;     /* ← prevents collapse */
-  }
-
-  /* Keep pages SIDE BY SIDE */
-  .page {
-    position: absolute;    /* ← keep book layout */
-    width: 50%;
-    height: auto;
-    padding: 28px 18px;
-  }
-
-  .page.left {
-    left: 0;
-  }
-
-  .page.right {
-    left: 50%;
-  }
-
-  /* IMPORTANT: allow book to expand with content */
-  .book.open {
-    min-height: 700px;
-  }
-
-  /* Images fit mobile */
-  .photos img {
-    height: auto;
-  }
-
-  /* Smaller text */
-  h2 {
-    font-size: 20px;
-  }
-
-  .page p {
-    font-size: 15px;
-    line-height: 1.6;
-  }
-
-  /* Music controls fit */
-  #musicControls {
-    width: calc(100% - 24px);
-    flex-wrap: wrap;
-  }
-
-  #seekBar,
-  #volumeBar {
-    width: 100%;
+/* Mobile scaling keeps equal height */
+@media (max-width:768px){
+  .book{
+    height: 720px; /* keeps proportions consistent when scaled */
   }
 }
-
