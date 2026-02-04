@@ -57,36 +57,37 @@ body{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:60px;
-
-  /* CENTER AFTER SCALING */
-  transform:scale(.88);
-  transform-origin:top center;
-  margin:0 auto;
-  width:100%;
+  gap:80px;
 }
 
 /* =========================
    📖 MOBILE BOOK
    ========================= */
 .book{
-  width:92vw;          /* FULL MOBILE WIDTH */
-  height:520px;        /* FIXED HEIGHT FOR ALL PAGES */
+  width:92vw;
+  height:520px;
   position:relative;
   perspective:2000px;
   cursor:pointer;
+  margin:0 auto;
 }
 
 /* =========================
-   📖 COVER — REAL HINGE
+   ⭐ REAL COVER FIX
+   cover = LEFT PAGE ONLY
    ========================= */
 .cover{
   position:absolute;
-  inset:0;
-  background:linear-gradient(160deg,#e7c8ff,#f6bfd9);
-  border-radius:28px;
+  top:0;
+  left:0;
 
-  transform-origin:left center;   /* 👈 real hinge */
+  width:50%;             /* ⭐ FIXED */
+  height:100%;
+
+  background:linear-gradient(160deg,#e7c8ff,#f6bfd9);
+  border-radius:28px 0 0 28px;
+
+  transform-origin:left center;
   transition:transform 1.4s ease;
 
   z-index:10;
@@ -95,16 +96,15 @@ body{
   justify-content:center;
 }
 
-/* OPEN ANIMATION */
 .book.open .cover{
   transform:rotateY(-180deg);
 }
-
 
 .cover-text{
   font-size:22px;
   color:#5a2f6f;
   text-align:center;
+  padding:0 12px;
 }
 
 /* Ribbon */
@@ -133,13 +133,13 @@ body{
 }
 
 /* =========================
-   📄 PAGES (SAME HEIGHT)
+   📄 PAGES — SAME HEIGHT
    ========================= */
 .page{
   position:absolute;
   top:0;
   width:50%;
-  height:100%;           /* ALL SAME HEIGHT */
+  height:100%;
   padding:28px 20px;
   background:linear-gradient(160deg,#f4efff,#ede6ff);
 }
@@ -159,9 +159,7 @@ body{
   text-align:center;
 }
 
-/* =========================
-   ✨ TEXT
-   ========================= */
+/* TEXT */
 h2{
   font-size:20px;
   color:#a456c9;
@@ -180,9 +178,7 @@ h2{
   color:#9b6fa6;
 }
 
-/* =========================
-   🖼 PHOTOS
-   ========================= */
+/* PHOTOS */
 .photos{
   display:grid;
   gap:14px;
@@ -195,7 +191,3 @@ h2{
   border-radius:18px;
   box-shadow:0 10px 20px rgba(180,140,200,0.35);
 }
-
-
-
-
